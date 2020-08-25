@@ -32,7 +32,15 @@ I love how Tailwind reinvents CSS by using structured class names that mimic com
 I chose local storage mostly because it's easy and saves development time for a small project like this.
 
 #### unsplash-js
-While testing with axios, I discovered Unplash has a helper JS library. So it made sense to use that instead.
+Axios is a battle-tested library which I have used on many occasions. However Unsplash provides their own JS library for dealing with the API. Adding a library adds weight to an application, so I'm not always in favor. But this small app does not need to do any other API requests where we could leverage axios, so using just unsplash-js makes sense given the better developer experience (typechecking and so on).
+
+### Design decisions
+
+#### react-router
+I decided to add a simple router using react-router-dom, in order to add /search and /favorites. I also could have used a simple button switch in combination with setState. However, if the user refreshes the page while they are viewing their favorites, they are redirected to the Search page leading to a bad user experience. Therefore, using a router made more sense.
+
+### Implementation decisions
+
 
 ### Routes
 
