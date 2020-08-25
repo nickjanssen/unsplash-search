@@ -41,6 +41,8 @@ I decided to add a simple router using react-router-dom, in order to add /search
 
 ### Implementation decisions
 
+#### react-router's NavLink
+While I first worked with useLocation() and the classnames library in order to display classes when a certain navigation route is active, I soon discovered the [NavLink](https://reactrouter.com/web/api/NavLink) component which does this automatically.
 
 ### Routes
 
