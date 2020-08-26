@@ -37,3 +37,15 @@ Object {
   ],
 }
 `;
+
+exports[`Can remove an image from a list 1`] = `
+Object {
+  "lists": Array [
+    Object {
+      "description": "Pics of dogs I adore",
+      "images": Array [],
+      "title": "Cute dogs",
+    },
+  ],
+}
+`;

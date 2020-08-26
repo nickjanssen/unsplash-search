@@ -24,7 +24,8 @@ const initialState: AppState = {
 };
 
 type Action =
-  | { type: "add-image-to-list"; list: FavoriteList; image: ImageResult }
+  | { type: "add-image-to-list"; listTitle: string; image: ImageResult }
+  | { type: "remove-image-from-list"; listTitle: string; imageId: string }
   | { type: "add-list"; list: FavoriteList };
 
 export const reducer = (state: AppState, action: Action) => {
@@ -36,10 +37,24 @@ export const reducer = (state: AppState, action: Action) => {
     case "add-image-to-list":
       return {
         lists: state.lists.map((list) => {
-          if (list.title === action.list.title) {
+          if (list.title === action.listTitle) {
             return {
               ...list,
               images: [...list.images, action.image],
+            };
+          }
+          return list;
+        }),
+      };
+    case "remove-image-from-list":
+      return {
+        lists: state.lists.map((list) => {
+          if (list.title === action.listTitle) {
+            return {
+              ...list,
+              images: list.images.filter(image => {
+                return image.id !== action.imageId
+              })
             };
           }
           return list;

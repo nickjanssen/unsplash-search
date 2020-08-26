@@ -51,6 +51,7 @@ function Image(props: Props) {
               <ListPicker {...props} />
             }
             interactive
+            appendTo={document.getElementById("root-context-menu")!}
           >
             <button
               className="text-3xl text-gray-500 hover:text-white my-2 ml-2 p-2 hover:bg-gray-700 rounded hover:bg-opacity-50"
