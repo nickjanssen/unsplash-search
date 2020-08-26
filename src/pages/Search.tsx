@@ -24,18 +24,24 @@ function Search(props: Props) {
     id: "none",
     results: [],
   });
+  const [error, setError] = React.useState<string>("");
 
   const doSearch = React.useMemo(() => {
     return debounce(async (searchTerm: string) => {
-      const stream = await unsplash.search.photos(searchTerm, 1, 10, {
-        orientation: "portrait",
-      });
-      const data: UnsplashResult = await toJson(stream);
+      try {
+        const stream = await unsplash.search.photos(searchTerm, 1, 10, {
+          orientation: "portrait",
+        });
+        const data: UnsplashResult = await toJson(stream);
 
-      // Use the next line in case you've reached the unsplash API limit
-      // const data: UnsplashResult = require("../static/exampleRes.json");
+        // Use the next line in case you've reached the unsplash API limit
+        // const data: UnsplashResult = require("../static/exampleRes.json");
 
-      setData(data);
+        setData(data);
+      } catch(e) {
+        setError("There was an error connecting to the Unsplash API. Please try again later.");
+      }
+
     }, 1000);
   }, []);
 
@@ -46,8 +52,9 @@ function Search(props: Props) {
   }, [doSearch, searchTerm]);
 
   return (
-    <div className="container mx-auto max-w-screen-lg">
-      <div className="m-10 relative">
+    <div className="container mx-auto max-w-screen-lg p-10">
+      {error && <div className="mb-5 p-4 bg-red-100 rounded text-red-600">{error}</div>}
+      <div className="relative">
         <input
           autoFocus
           className="border-2 border-gray-300 bg-white h-16 px-5 pl-16 rounded-lg text-3xl focus:outline-none w-full"
@@ -63,7 +70,7 @@ function Search(props: Props) {
           <BsSearch />
         </div>
       </div>
-      <div className="m-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {data.results.map((image) => {
           return <Image key={image.id} image={image} {...props} />;
         })}
