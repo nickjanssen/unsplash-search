@@ -20,9 +20,11 @@ export interface AppState {
 }
 
 const savedStateString = localStorage.getItem("unsplash-search.state");
-const initialState: AppState = savedStateString ? JSON.parse(savedStateString) : {
-  lists: [],
-}
+const initialState: AppState = savedStateString
+  ? JSON.parse(savedStateString)
+  : {
+      lists: [],
+    };
 
 type Action =
   | { type: "add-image-to-list"; listTitle: string; image: ImageResult }
@@ -53,9 +55,9 @@ export const reducer = (state: AppState, action: Action) => {
           if (list.title === action.listTitle) {
             return {
               ...list,
-              images: list.images.filter(image => {
-                return image.id !== action.imageId
-              })
+              images: list.images.filter((image) => {
+                return image.id !== action.imageId;
+              }),
             };
           }
           return list;
@@ -70,20 +72,22 @@ function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
   React.useEffect(() => {
-    localStorage.setItem("unsplash-search.state", JSON.stringify(state))
-  }, [state])
+    localStorage.setItem("unsplash-search.state", JSON.stringify(state));
+  }, [state]);
 
   return (
     <>
-      <div className="p-5 border-b border-gray-300">
+      <div className="p-5 border-b border-gray-300 flex justify-center items-center flex-col sm:flex-row">
+        <div className="mx-4 mr-5 py-2 text-xl font-bold">Unsplash Search</div>
+
         <ul className="flex justify-center">
           {navRoutes.map(({ label, pathname }) => {
             return (
               <li className="mx-2" key={pathname}>
                 <NavLink
                   to={pathname}
-                  className="text-center block rounded py-2 px-4"
-                  activeClassName="text-white border border-blue-500 bg-blue-500 hover:bg-blue-700"
+                  className="text-center block rounded py-2 px-4 bg-gray-100 hover:bg-blue-100 border border-white"
+                  activeClassName="text-white border-blue-500 bg-blue-500 hover:bg-blue-700"
                 >
                   {label}
                 </NavLink>

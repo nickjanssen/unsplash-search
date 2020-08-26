@@ -27,7 +27,7 @@ export interface Props {
 function Image(props: Props) {
   return (
     <div
-      className="h-64 flex bg-cover bg-center"
+      className="rounded h-64 flex bg-cover bg-center"
       style={React.useMemo(
         () => ({
           backgroundImage: `url(${props.image.urls.thumb})`,
