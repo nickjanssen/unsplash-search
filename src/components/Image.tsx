@@ -7,7 +7,6 @@ export interface ImageResult {
     download: string;
   };
   urls: {
-    full: string;
     thumb: string;
   };
   user: {

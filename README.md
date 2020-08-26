@@ -50,10 +50,15 @@ We don't use any tailwind modifications in our app, so I could have used the CDN
 #### Masonry vs CSS Grid
 I looked into using a Masonry grid like Unsplash is doing, but I found that it would take too much time to add to this project. Adding a proper Masonry is difficult as it requires a combination of CSS and JavaScript. The current solution, a CSS grid works well enough for this small scale app.
 
+#### No list ids
+Lists currently compare against titles only, given the small scale of the app. In a real world app using ids is a more robust way.
+
 ### TODO
 
 * Use absolute imports
 * Implement a masonry grid
+* Delete lists
+* Delete images from a list
 
 ### Routes
 
