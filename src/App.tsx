@@ -19,9 +19,10 @@ export interface AppState {
   lists: Array<FavoriteList>;
 }
 
-const initialState: AppState = {
+const savedStateString = localStorage.getItem("unsplash-search.state");
+const initialState: AppState = savedStateString ? JSON.parse(savedStateString) : {
   lists: [],
-};
+}
 
 type Action =
   | { type: "add-image-to-list"; listTitle: string; image: ImageResult }
@@ -67,6 +68,10 @@ export const reducer = (state: AppState, action: Action) => {
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
+
+  React.useEffect(() => {
+    localStorage.setItem("unsplash-search.state", JSON.stringify(state))
+  }, [state])
 
   return (
     <>
