@@ -4,11 +4,15 @@ Search images using Unsplash!
 
 ## Live demo
 
-TBD
+https://unsplash-search-bb83b.web.app
 
 ## Running the app
 
-From the root of the directory, run:
+Copy `.env.example` to `.env.local`.
+
+Open `.env.local` and change `REACT_APP_UNSPLASH_API_KEY` with your own Unsplash API key.
+
+Next, from the root of the directory, run:
 ```
 yarn
 yarn start
@@ -48,7 +52,7 @@ While I first worked with useLocation() and the classnames library in order to d
 We don't use any tailwind modifications in our app, so I could have used the CDN build without having to setup postcss, autoprefixer and the tailwind CLI. However, Tailwind [explicitly recommends](https://tailwindcss.com/docs/installation#using-tailwind-via-cdn) installing through NPM to get benefits such as tree-shaking so I opted to go the extra mile here.
 
 #### Masonry vs CSS Grid
-I looked into using a Masonry grid like Unsplash is doing, but I found that it would take too much time to add to this project. Adding a proper Masonry is difficult as it requires a combination of CSS and JavaScript. The current solution, a CSS grid works well enough for this small scale app.
+I looked into using a Masonry grid like Unsplash is doing, but I found that it would take too much time to add to this project. Adding a proper Masonry is difficult as it requires a combination of CSS and JavaScript. The current solution, a CSS grid, works well enough for this small scale app.
 
 #### No list ids
 Lists currently compare against titles only, given the small scale of the app. In a real world app using ids is a more robust way.
@@ -58,20 +62,19 @@ Given the time constraints I opted for a simple useReducer hook, and passing dow
 
 ### TODO
 
+* Edit list names and descriptions
 * Use absolute imports
 * Implement a masonry grid
 * Delete lists
 * Delete images from a list
+* Assign proper ids to lists
+* Error handling of edge cases (API limit reached, etc)
 
 ### Routes
 
-#### /
 #### /search
 Main Search page
 
 #### /favorites
 Favorites page which displays a collection of lists, stacked vertically.
-
-Every list is a simple H1 and paragraph tag, which can be edited by clicking the small pencil next to it. Every list also contains chevron which can be clicked on to show/hide its associated images.
-
 
