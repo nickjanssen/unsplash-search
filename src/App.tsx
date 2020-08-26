@@ -26,7 +26,7 @@ function App() {
         <ul className="flex justify-center">
           {navRoutes.map(({ label, pathname }) => {
             return (
-              <li className="mx-2">
+              <li className="mx-2" key={pathname}>
                 <NavLink
                   to={pathname}
                   className="text-center block rounded py-2 px-4"
