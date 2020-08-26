@@ -5,20 +5,19 @@ import debounce from "lodash/debounce";
 // import unsplash from '../services/unsplash';
 // import { toJson } from "unsplash-js";
 
+import Image, { ImageResult } from '../components/Image';
+
 interface UnsplashResult {
   id: string;
-  results: Array<{
-    id: string;
-    urls: {
-      full: string;
-      thumb: string;
-    };
-  }>;
+  results: Array<ImageResult>;
 }
 
 function Search() {
   const [searchTerm, setSearchTerm] = React.useState<string>("");
-  const [data, setData] = React.useState<UnsplashResult>({ id: "none", results: [] });
+  const [data, setData] = React.useState<UnsplashResult>({
+    id: "none",
+    results: [],
+  });
 
   const doSearch = React.useMemo(() => {
     return debounce(async () => {
@@ -30,11 +29,11 @@ function Search() {
 
       setData(data);
     }, 1000);
-  }, [])
+  }, []);
 
   React.useEffect(() => {
     doSearch();
-  }, [doSearch, searchTerm])
+  }, [doSearch, searchTerm]);
 
   return (
     <div className="container mx-auto max-w-screen-lg">
@@ -53,17 +52,12 @@ function Search() {
         </div>
       </div>
       <div className="m-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {data.results.map(({ id, urls }) => {
+        {data.results.map((image) => {
           return (
-            <div
-              key={id}
-              className="bg-red-500 h-64"
-              style={{
-                backgroundImage: `url(${urls.thumb})`,
-              }}
-            >
-              {id}
-            </div>
+            <Image
+              key={image.id}
+              image={image}
+            />
           );
         })}
       </div>

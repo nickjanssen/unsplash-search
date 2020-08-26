@@ -47,6 +47,14 @@ While I first worked with useLocation() and the classnames library in order to d
 #### Tailwind's tailwind.css
 We don't use any tailwind modifications in our app, so I could have used the CDN build without having to setup postcss, autoprefixer and the tailwind CLI. However, Tailwind [explicitly recommends](https://tailwindcss.com/docs/installation#using-tailwind-via-cdn) installing through NPM to get benefits such as tree-shaking so I opted to go the extra mile here.
 
+#### Masonry vs CSS Grid
+I looked into using a Masonry grid like Unsplash is doing, but I found that it would take too much time to add to this project. Adding a proper Masonry is difficult as it requires a combination of CSS and JavaScript. The current solution, a CSS grid works well enough for this small scale app.
+
+### TODO
+
+* Use absolute imports
+* Implement a masonry grid
+
 ### Routes
 
 #### /
