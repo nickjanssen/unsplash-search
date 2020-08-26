@@ -3,7 +3,7 @@ import { Props } from "./Image";
 import classNames from "classnames";
 
 function ListPicker(props: Props) {
-  const { dispatch } = props;
+  const { dispatch, image } = props;
 
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -77,12 +77,12 @@ function ListPicker(props: Props) {
             list: {
               title,
               description,
-              images: [props.image],
+              images: [image],
             },
           });
           setTitle("");
           setDescription("");
-        }, [title, description, dispatch])}
+        }, [title, description, image, dispatch])}
       >
         Create
       </button>
