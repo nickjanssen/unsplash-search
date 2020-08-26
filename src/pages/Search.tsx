@@ -40,7 +40,9 @@ function Search(props: Props) {
   }, []);
 
   React.useEffect(() => {
-    doSearch();
+    if (searchTerm) {
+      doSearch(searchTerm);
+    }
   }, [doSearch, searchTerm]);
 
   return (
