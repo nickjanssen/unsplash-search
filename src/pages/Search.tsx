@@ -42,7 +42,7 @@ function Search(props: Props) {
         setError("There was an error connecting to the Unsplash API. Please try again later.");
       }
 
-    }, 1000);
+    }, 200);
   }, []);
 
   React.useEffect(() => {
