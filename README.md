@@ -44,6 +44,9 @@ I decided to add a simple router using react-router-dom, in order to add /search
 #### react-router's NavLink
 While I first worked with useLocation() and the classnames library in order to display classes when a certain navigation route is active, I soon discovered the [NavLink](https://reactrouter.com/web/api/NavLink) component which does this automatically.
 
+#### Tailwind's tailwind.css
+We don't use any tailwind modifications in our app, so I could have used the CDN build without having to setup postcss, autoprefixer and the tailwind CLI. However, Tailwind [explicitly recommends](https://tailwindcss.com/docs/installation#using-tailwind-via-cdn) installing through NPM to get benefits such as tree-shaking so I opted to go the extra mile here.
+
 ### Routes
 
 #### /
