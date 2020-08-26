@@ -1,5 +1,8 @@
 import React from "react";
 import { BsDownload, BsStar } from "react-icons/bs";
+import Tippy from "@tippyjs/react";
+import { AppState } from "../App";
+import ListPicker from "./ListPicker";
 
 export interface ImageResult {
   id: string;
@@ -15,17 +18,22 @@ export interface ImageResult {
   };
 }
 
-interface Props {
+export interface Props {
   image: ImageResult;
+  appState: AppState;
+  dispatch: Function;
 }
 
 function Image(props: Props) {
   return (
     <div
       className="h-64 flex bg-cover bg-center"
-      style={React.useMemo(() => ({
-        backgroundImage: `url(${props.image.urls.thumb})`,
-      }), [props.image.urls.thumb])}
+      style={React.useMemo(
+        () => ({
+          backgroundImage: `url(${props.image.urls.thumb})`,
+        }),
+        [props.image.urls.thumb]
+      )}
     >
       <div className="bg-black bg-opacity-0 transition-colors duration-200 hover:bg-opacity-50 flex-1 opacity-0 hover:opacity-100 flex justify-between flex-col">
         <div className="flex justify-center">
@@ -37,14 +45,19 @@ function Image(props: Props) {
           >
             <BsDownload />
           </button>
-          <button
-            className="text-3xl text-gray-500 hover:text-white my-2 ml-2 p-2 hover:bg-gray-700 rounded hover:bg-opacity-50"
-            onClick={React.useCallback(() => {
-              // todo
-            }, [])}
+          <Tippy
+            trigger="click"
+            content={
+              <ListPicker {...props} />
+            }
+            interactive
           >
-            <BsStar />
-          </button>
+            <button
+              className="text-3xl text-gray-500 hover:text-white my-2 ml-2 p-2 hover:bg-gray-700 rounded hover:bg-opacity-50"
+            >
+              <BsStar />
+            </button>
+          </Tippy>
         </div>
 
         <a

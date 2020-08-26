@@ -77,7 +77,7 @@ function App() {
           <Favorites appState={state} dispatch={dispatch} />
         </Route>
         <Route path="/search">
-          <Search />
+          <Search appState={state} dispatch={dispatch} />
         </Route>
         <Route path="/">
           <Redirect to="/search" />

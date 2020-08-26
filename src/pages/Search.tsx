@@ -6,13 +6,19 @@ import debounce from "lodash/debounce";
 // import { toJson } from "unsplash-js";
 
 import Image, { ImageResult } from '../components/Image';
+import { AppState } from "../App";
 
 interface UnsplashResult {
   id: string;
   results: Array<ImageResult>;
 }
 
-function Search() {
+interface Props {
+  appState: AppState;
+  dispatch: Function;
+}
+
+function Search(props: Props) {
   const [searchTerm, setSearchTerm] = React.useState<string>("");
   const [data, setData] = React.useState<UnsplashResult>({
     id: "none",
@@ -43,6 +49,7 @@ function Search() {
           type="search"
           name="search"
           placeholder="Enter search term"
+          value={searchTerm}
           onChange={React.useCallback((e) => {
             setSearchTerm(e.target.value);
           }, [])}
@@ -57,6 +64,7 @@ function Search() {
             <Image
               key={image.id}
               image={image}
+              {...props}
             />
           );
         })}

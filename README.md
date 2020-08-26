@@ -53,6 +53,9 @@ I looked into using a Masonry grid like Unsplash is doing, but I found that it w
 #### No list ids
 Lists currently compare against titles only, given the small scale of the app. In a real world app using ids is a more robust way.
 
+#### Redux store vs simple useReducer
+Given the time constraints I opted for a simple useReducer hook, and passing down dispatch and the state of the app as props. In a real world app using a proper Redux store makes more sense.
+
 ### TODO
 
 * Use absolute imports
