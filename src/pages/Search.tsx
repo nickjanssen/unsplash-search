@@ -2,10 +2,10 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import debounce from "lodash/debounce";
 
-// import unsplash from '../services/unsplash';
-// import { toJson } from "unsplash-js";
+import unsplash from "../services/unsplash";
+import { toJson } from "unsplash-js";
 
-import Image, { ImageResult } from '../components/Image';
+import Image, { ImageResult } from "../components/Image";
 import { AppState } from "../App";
 
 interface UnsplashResult {
@@ -26,12 +26,14 @@ function Search(props: Props) {
   });
 
   const doSearch = React.useMemo(() => {
-    return debounce(async () => {
-      // const stream = await unsplash.search.photos(searchTerm, 1, 10, { orientation: "portrait" })
-      // const data = await toJson(stream);
-      const data: UnsplashResult = require("../static/exampleRes.json");
+    return debounce(async (searchTerm: string) => {
+      const stream = await unsplash.search.photos(searchTerm, 1, 10, {
+        orientation: "portrait",
+      });
+      const data: UnsplashResult = await toJson(stream);
 
-      console.log("data", data);
+      // Use the next line in case you've reached the unsplash API limit
+      // const data: UnsplashResult = require("../static/exampleRes.json");
 
       setData(data);
     }, 1000);
@@ -45,6 +47,7 @@ function Search(props: Props) {
     <div className="container mx-auto max-w-screen-lg">
       <div className="m-10 relative">
         <input
+          autoFocus
           className="border-2 border-gray-300 bg-white h-16 px-5 pl-16 rounded-lg text-3xl focus:outline-none w-full"
           type="search"
           name="search"
@@ -60,13 +63,7 @@ function Search(props: Props) {
       </div>
       <div className="m-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {data.results.map((image) => {
-          return (
-            <Image
-              key={image.id}
-              image={image}
-              {...props}
-            />
-          );
+          return <Image key={image.id} image={image} {...props} />;
         })}
       </div>
     </div>
