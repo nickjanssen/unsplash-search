@@ -51,7 +51,7 @@ export const reducer = (state: AppState, action: Action) => {
 };
 
 function App() {
-  // const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
   return (
     <>
@@ -74,7 +74,7 @@ function App() {
       </div>
       <Switch>
         <Route path="/favorites">
-          <Favorites />
+          <Favorites appState={state} dispatch={dispatch} />
         </Route>
         <Route path="/search">
           <Search />
