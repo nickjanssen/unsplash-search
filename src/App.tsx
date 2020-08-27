@@ -2,7 +2,11 @@ import React from "react";
 import { Switch, Route, Redirect, NavLink } from "react-router-dom";
 import Search from "./pages/Search";
 import Favorites, { FavoriteList } from "./pages/Favorites";
-import { ImageResult } from "./components/Image";
+import appReducer from "./reducers/app";
+
+export interface AppState {
+  lists: Array<FavoriteList>;
+}
 
 const navRoutes = [
   {
@@ -15,10 +19,6 @@ const navRoutes = [
   },
 ];
 
-export interface AppState {
-  lists: Array<FavoriteList>;
-}
-
 const savedStateString = localStorage.getItem("unsplash-search.state");
 const initialState: AppState = savedStateString
   ? JSON.parse(savedStateString)
@@ -26,76 +26,8 @@ const initialState: AppState = savedStateString
       lists: [],
     };
 
-type Action =
-  | { type: "add-image-to-list"; listTitle: string; image: ImageResult }
-  | { type: "remove-image-from-list"; listTitle: string; imageId: string }
-  | { type: "change-list-title"; listTitle: string; newListTitle: string }
-  | { type: "change-list-description"; listTitle: string; newListDescription: string }
-  | { type: "add-list"; list: FavoriteList };
-
-export const reducer = (state: AppState, action: Action) => {
-  switch (action.type) {
-    case "add-list":
-      return {
-        lists: [...state.lists, action.list],
-      };
-    case "add-image-to-list":
-      return {
-        lists: state.lists.map((list) => {
-          if (list.title === action.listTitle) {
-            return {
-              ...list,
-              images: [...list.images, action.image],
-            };
-          }
-          return list;
-        }),
-      };
-    case "remove-image-from-list":
-      return {
-        lists: state.lists.map((list) => {
-          if (list.title === action.listTitle) {
-            return {
-              ...list,
-              images: list.images.filter((image) => {
-                return image.id !== action.imageId;
-              }),
-            };
-          }
-          return list;
-        }),
-      };
-      case "change-list-title":
-        return {
-          lists: state.lists.map((list) => {
-            if (list.title === action.listTitle) {
-              return {
-                ...list,
-                title: action.newListTitle
-              };
-            }
-            return list;
-          }),
-        };
-        case "change-list-description":
-          return {
-            lists: state.lists.map((list) => {
-              if (list.title === action.listTitle) {
-                return {
-                  ...list,
-                  description: action.newListDescription
-                };
-              }
-              return list;
-            }),
-          };
-    default:
-      throw new Error();
-  }
-};
-
 function App() {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = React.useReducer(appReducer, initialState);
 
   React.useEffect(() => {
     localStorage.setItem("unsplash-search.state", JSON.stringify(state));

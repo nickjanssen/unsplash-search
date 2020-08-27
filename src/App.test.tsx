@@ -1,11 +1,12 @@
-import { AppState, reducer } from "./App";
+import { AppState } from "./App";
+import appReducer from "./reducers/app";
 
 test("Can add a list", () => {
   const state: AppState = {
     lists: [],
   };
 
-  const newState: AppState = reducer(state, {
+  const newState: AppState = appReducer(state, {
     type: "add-list",
     list: {
       title: "Cute dogs",
@@ -28,7 +29,7 @@ test("Can add an image to a list", () => {
     ],
   };
 
-  const newState: AppState = reducer(state, {
+  const newState: AppState = appReducer(state, {
     type: "add-image-to-list",
     listTitle: "Cute dogs",
     image: {
@@ -74,7 +75,7 @@ test("Can remove an image from a list", () => {
     ],
   };
 
-  const newState: AppState = reducer(state, {
+  const newState: AppState = appReducer(state, {
     type: "remove-image-from-list",
     listTitle: "Cute dogs",
     imageId:  "U6nlG0Y5sfs"
@@ -95,7 +96,7 @@ test("Can change the title of a list", () => {
     ],
   };
 
-  const newState: AppState = reducer(state, {
+  const newState: AppState = appReducer(state, {
     type: "change-list-title",
     listTitle: "Cute dogs",
     newListTitle:  "Super cute dogs"
@@ -116,7 +117,7 @@ test("Can change the description of a list", () => {
     ],
   };
 
-  const newState: AppState = reducer(state, {
+  const newState: AppState = appReducer(state, {
     type: "change-list-description",
     listTitle: "Cute dogs",
     newListDescription:  "Pics of cute dogs I adore",
