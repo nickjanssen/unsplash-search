@@ -82,3 +82,45 @@ test("Can remove an image from a list", () => {
 
   expect(newState).toMatchSnapshot();
 });
+
+
+test("Can change the title of a list", () => {
+  const state: AppState = {
+    lists: [
+      {
+        title: "Cute dogs",
+        description: "Pics of dogs I adore",
+        images: []
+      },
+    ],
+  };
+
+  const newState: AppState = reducer(state, {
+    type: "change-list-title",
+    listTitle: "Cute dogs",
+    newListTitle:  "Super cute dogs"
+  });
+
+  expect(newState).toMatchSnapshot();
+});
+
+
+test("Can change the description of a list", () => {
+  const state: AppState = {
+    lists: [
+      {
+        title: "Cute dogs",
+        description: "Pics of dogs I adore",
+        images: []
+      },
+    ],
+  };
+
+  const newState: AppState = reducer(state, {
+    type: "change-list-description",
+    listTitle: "Cute dogs",
+    newListDescription:  "Pics of cute dogs I adore",
+  });
+
+  expect(newState).toMatchSnapshot();
+});

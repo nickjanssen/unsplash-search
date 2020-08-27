@@ -29,6 +29,8 @@ const initialState: AppState = savedStateString
 type Action =
   | { type: "add-image-to-list"; listTitle: string; image: ImageResult }
   | { type: "remove-image-from-list"; listTitle: string; imageId: string }
+  | { type: "change-list-title"; listTitle: string; newListTitle: string }
+  | { type: "change-list-description"; listTitle: string; newListDescription: string }
   | { type: "add-list"; list: FavoriteList };
 
 export const reducer = (state: AppState, action: Action) => {
@@ -63,6 +65,30 @@ export const reducer = (state: AppState, action: Action) => {
           return list;
         }),
       };
+      case "change-list-title":
+        return {
+          lists: state.lists.map((list) => {
+            if (list.title === action.listTitle) {
+              return {
+                ...list,
+                title: action.newListTitle
+              };
+            }
+            return list;
+          }),
+        };
+        case "change-list-description":
+          return {
+            lists: state.lists.map((list) => {
+              if (list.title === action.listTitle) {
+                return {
+                  ...list,
+                  description: action.newListDescription
+                };
+              }
+              return list;
+            }),
+          };
     default:
       throw new Error();
   }

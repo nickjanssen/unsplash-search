@@ -38,6 +38,30 @@ Object {
 }
 `;
 
+exports[`Can change the description of a list 1`] = `
+Object {
+  "lists": Array [
+    Object {
+      "description": "Pics of cute dogs I adore",
+      "images": Array [],
+      "title": "Cute dogs",
+    },
+  ],
+}
+`;
+
+exports[`Can change the title of a list 1`] = `
+Object {
+  "lists": Array [
+    Object {
+      "description": "Pics of dogs I adore",
+      "images": Array [],
+      "title": "Super cute dogs",
+    },
+  ],
+}
+`;
+
 exports[`Can remove an image from a list 1`] = `
 Object {
   "lists": Array [
