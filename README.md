@@ -43,6 +43,9 @@ Axios is a battle-tested library which I have used on many occasions. However Un
 #### react-router
 I decided to add a simple router using react-router-dom, in order to add /search and /favorites. I also could have used a simple button switch in combination with setState. However, if the user refreshes the page while they are viewing their favorites, they are redirected to the Search page leading to a bad user experience. Therefore, using a router made more sense.
 
+#### Redux store vs simple useReducer
+Given the time constraints I opted for a simple useReducer hook, and passing down dispatch and the state of the app as props. In a real world app using a proper Redux store makes more sense.
+
 ### Implementation decisions
 
 #### react-router's NavLink
@@ -57,18 +60,17 @@ I looked into using a Masonry grid like Unsplash is doing, but I found that it w
 #### No list ids
 Lists currently compare against titles only, given the small scale of the app. In a real world app using ids is a more robust way.
 
-#### Redux store vs simple useReducer
-Given the time constraints I opted for a simple useReducer hook, and passing down dispatch and the state of the app as props. In a real world app using a proper Redux store makes more sense.
-
 ### TODO
 
-* Edit list names and descriptions
 * Use absolute imports
+* Add pagination
 * Implement a masonry grid
+* Lazy loading of Image/ListPicker component
 * Delete lists
 * Delete images from a list
 * Assign proper ids to lists
-* Error handling of edge cases (API limit reached, etc)
+* Throw specific API errors instead of generic ones
+* Form validation for title and description
 
 ### Routes
 
